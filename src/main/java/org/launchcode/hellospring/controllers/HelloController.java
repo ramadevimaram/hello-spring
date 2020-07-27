@@ -45,20 +45,22 @@ public class HelloController{
     }
  */
 //Learning Form
-@Controller
+/*@Controller
 @ResponseBody
-@RequestMapping("hello")//every request prefix adds /hello
+@RequestMapping("hello")//every request should begin /hello
 public class HelloController {
     //Responds to /hello?name=LaunchCode
     //use RequestParam
     //@GetMapping("hello")//Use GetMethod
     //@PostMapping("hello")//Use PostMethod
-    //@RequestMapping(method = {RequestMethod.GET,RequestMethod.POST},value = "hello")////remove here and added to top of class means class level annotation
+    //lives path /hello/hello
+    @RequestMapping(method = {RequestMethod.GET,RequestMethod.POST},value = "hello")////remove here and added to top of class means class level annotation
     //@ResponseBody //remove here and added to top of class means class level annotation
-    @RequestMapping(method = {RequestMethod.GET,RequestMethod.POST})//path live /hello
+    //@RequestMapping(method = {RequestMethod.GET,RequestMethod.POST})//path live /hello
     public String hello(@RequestParam String name){
         return "Hello," + name +"!!!!";
     }
+    //lives /hello/form
     @GetMapping("form")
     //@ResponseBody
     public String helloForm() {
@@ -72,6 +74,46 @@ public class HelloController {
                 "</html>";
     }
 }
+*/
+//Exercise Controllers and Routing
+@Controller
+@ResponseBody
+@RequestMapping("hello")//every request prefix adds /hello
+public class HelloController {
+    //Responds to /hello?name=LaunchCode
+    //use RequestParam
+    //@GetMapping("hello")//Use GetMethod
+    //@PostMapping("hello")//Use PostMethod
+    //path lives /hello/hello
+    @RequestMapping(method = {RequestMethod.GET,RequestMethod.POST},value = "hello")////remove here and added to top of class means class level annotation
+    //@ResponseBody //remove here and added to top of class means class level annotation
+    public static String createMessage(@RequestParam String name,String language){
+        return "Hello," + name + " " + language +"!!!!";
+    }
+    //lives /hello/form
+    @GetMapping("form")
+    //@ResponseBody
+    public String helloForm() {
+        return "<html>" +
+                "<body>" +
+                "<form action='hello' method='post'>" +//submit a request to /hello
+                "<input type='text' name='name'>" +
+                "<label>My favorite language:" +
+                "<select name='language'>" +
+                "<option value='English' selected>English</option>" +
+                "<option value='Spanish'>Spanish</option>" +
+                "<option value='Telugu'>Telugu</option>" +
+                "<option value='Hindi'>Hindi</option>" +
+                "<option value='Tamil'>Tamil</option>" +
+                "</select></label><br>" +
+                "<input type='submit' value='greet me!'>" +
+                "</form>" +
+                "</body>" +
+                "</html>";
+    }
+}
+
+
 /*@Controller
 public class HelloController{
     //Responds to /hello?name=LaunchCode
