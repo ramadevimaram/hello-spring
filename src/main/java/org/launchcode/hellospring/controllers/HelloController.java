@@ -25,12 +25,14 @@ import java.util.List;
 /*@Controller
 public class HelloController{
     //Responds to /hello?name=LaunchCode
+    //use RequestParam
     @RequestMapping(value = "hello", method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public String hello(@RequestParam String name){
         return "Hello," + name +"!!!!";
     }
     //Responds tp /hello/LaunchCode
+    //Use PathVariable
     @GetMapping("hello/{name}")
     @ResponseBody
     public String helloAgain(@PathVariable String name){
@@ -42,7 +44,35 @@ public class HelloController{
         return "form";
     }
  */
+//Learning Form
 @Controller
+@ResponseBody
+@RequestMapping("hello")//every request prefix adds /hello
+public class HelloController {
+    //Responds to /hello?name=LaunchCode
+    //use RequestParam
+    //@GetMapping("hello")//Use GetMethod
+    //@PostMapping("hello")//Use PostMethod
+    //@RequestMapping(method = {RequestMethod.GET,RequestMethod.POST},value = "hello")////remove here and added to top of class means class level annotation
+    //@ResponseBody //remove here and added to top of class means class level annotation
+    @RequestMapping(method = {RequestMethod.GET,RequestMethod.POST})//path live /hello
+    public String hello(@RequestParam String name){
+        return "Hello," + name +"!!!!";
+    }
+    @GetMapping("form")
+    //@ResponseBody
+    public String helloForm() {
+        return "<html>" +
+                "<body>" +
+                "<form action='hello'method='post'>" +//submit a request to /hello
+                "<input type='text' name='name'>" +
+                "<input type='submit' value='greet me!'>" +
+                "</form>" +
+                "</body>" +
+                "</html>";
+    }
+}
+/*@Controller
 public class HelloController{
     //Responds to /hello?name=LaunchCode
     @RequestMapping(value = "hello", method = {RequestMethod.GET,RequestMethod.POST})
@@ -75,3 +105,4 @@ public class HelloController{
         return "hello-list";
     }
 }
+*/
