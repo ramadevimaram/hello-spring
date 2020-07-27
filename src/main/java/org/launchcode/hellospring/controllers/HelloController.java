@@ -88,7 +88,18 @@ public class HelloController {
     @RequestMapping(method = {RequestMethod.GET,RequestMethod.POST},value = "hello")////remove here and added to top of class means class level annotation
     //@ResponseBody //remove here and added to top of class means class level annotation
     public static String createMessage(@RequestParam String name,String language){
-        return "Hello," + name + " " + language +"!!!!";
+       // return "Hello," + name + " " + language +"!!!!";
+
+        String html =
+                "<html>" +
+                        "<body>" +
+                        "<h1>Name :" + name +
+                        "</h1>" +
+                        "<h1> Language :"+language+
+                        "</h1>"+
+                        "</body>" +
+                        "</html>";
+        return html;
     }
     //lives /hello/form
     @GetMapping("form")
